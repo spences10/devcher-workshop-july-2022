@@ -1,4 +1,6 @@
 <script>
+  /** @type {any} */
+  export let pages
   import ThemeSwitch from './theme-switch.svelte'
 </script>
 
@@ -10,7 +12,12 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0">
-      <li><a href="/about">About</a></li>
+      <li><a href="/posts">Posts</a></li>
+      {#each pages as { title, slug }}
+        <li>
+          <a sveltekit:prefetch href={`/${slug}`}>{title}</a>
+        </li>
+      {/each}
     </ul>
     <ThemeSwitch />
   </div>
